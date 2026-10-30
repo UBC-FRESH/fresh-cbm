@@ -76,8 +76,13 @@ print(row.shape)  # (years + 1, accounts)
 ## Validation
 
 Every cache must record a source manifest and be validated by comparing a
-sample of rows against a fresh exact `CarbonLedger` run at the same state. Exact
-`ws4 carbon` replay remains the reporting authority.
+sample of rows against a fresh exact `CarbonLedger` run at the same state:
+
+```bash
+python scripts/validate_cache.py   --cache cache/tsa41-cc-offsets   --dataset /path/to/compiled-dataset   --package /path/to/femic-carbon-package   --hwp-config config/carbon/hwp.bc.yaml   --samples 8
+```
+
+Exact `ws4 carbon` replay remains the reporting authority.
 
 ## Status
 
