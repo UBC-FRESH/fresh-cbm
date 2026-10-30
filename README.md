@@ -84,6 +84,19 @@ python scripts/validate_cache.py   --cache cache/tsa41-cc-offsets   --dataset /p
 
 Exact `ws4 carbon` replay remains the reporting authority.
 
+## Release
+
+After validation, write checksums and a release manifest:
+
+```bash
+python scripts/package_cache.py --cache cache/tsa41-cc-offsets
+```
+
+This verifies every file named in `manifest.json` and writes `SHA256SUMS` and
+`release.json`. Upload the index, manifest, offsets, checksum file, and release
+manifest as release assets. Do not commit multi-GB arrays to ordinary git
+history; use release assets or LFS.
+
 ## Status
 
 This repository is new. The first target is TSA41, one-event `CC@offset` chains,
