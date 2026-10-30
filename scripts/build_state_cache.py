@@ -111,7 +111,7 @@ def build(args: argparse.Namespace) -> None:
         "offsets": offsets,
         "empty": True,
         "states": len(states),
-        "files": ["empty.npy", *[f"offset_{offset:02d}.npy" for offset in offsets]],
+        "files": ["values/empty.npy", *[f"values/offset_{offset:02d}.npy" for offset in offsets]],
         "build_seconds": time.perf_counter() - started,
         "hwp_config": str(Path(args.hwp_config).resolve()) if args.hwp_config else None,
     }
