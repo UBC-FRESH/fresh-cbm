@@ -1,0 +1,5 @@
+cache/
+*.npy
+!tests/fixtures/*.npy
+__pycache__/
+*.pyc
