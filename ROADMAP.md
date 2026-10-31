@@ -13,7 +13,7 @@ Every phase starts as `planned` with `Parent issue: TBD`. Activate a phase only 
 | P2 Contracts and prototype | #9 | `feature/p2-package-cli` | complete |
 | P3 Build | #13 | `feature/p3-chain-family` | complete |
 | P4 Verify | #25 | `feature/p4-verification` | complete |
-| P5 Release and deploy | TBD | `feature/p5-release` | planned |
+| P5 Release and deploy | #29 | `feature/p5-release` | active |
 | P6 Operate and maintain | TBD | `feature/p6-operate` | planned |
 
 ## Lifecycle Map
@@ -134,14 +134,16 @@ Acceptance criteria:
 
 ## Phase 5: Release and deploy
 
-Parent issue: TBD
+Parent issue: #29
 Branch: `feature/p5-release`
-Status: planned
+Status: active
 
-Goal: tag a release, publish the docs, and verify the published artifacts from a clean checkout.
+Goal: tag a package release, publish artifacts, and verify from a clean install.
 
-- [ ] P5.1 Write the release notes and the known-gaps list
-- [ ] P5.2 Tag, publish, and verify from a clean checkout (maintainer approval required)
+- [ ] P5.1 Bump the version and write release notes
+- [ ] P5.2 Build and verify wheel/sdist
+- [ ] P5.3 Tag and publish the GitHub release
+- [ ] P5.4 Record the PyPI decision and final checks
 
 Acceptance criteria:
 

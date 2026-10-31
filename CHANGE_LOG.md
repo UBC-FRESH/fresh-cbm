@@ -70,3 +70,7 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
 - P4 close-out: offline verification, wheel/sdist smoke tests, release checklist,
   and both cache release checks are complete. Parent issue #25 closed. P5 is
   planned in `ROADMAP.md`; dashboard and docs green.
+
+- P5.1 package release: bumped `fresh-cbm` to 0.2.0, added release notes, expanded
+  the release guide with package build/tag/GitHub commands, and explicitly kept
+  PyPI publication as a separate maintainer decision.

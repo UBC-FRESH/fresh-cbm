@@ -18,6 +18,24 @@ Releasing a cache
 
       fresh-cbm-verify --cache cache/tsa41-cc-offsets
 
+Package release
+---------------
+
+The package release is separate from the cache release tags.
+
+.. code-block:: bash
+
+   python -m pip install build
+   python -m build
+   fresh-cbm-verify --cache cache/tsa41-cc-offsets
+   gh release create v0.2.0 \
+     --title "fresh-cbm v0.2.0" \
+     --notes-file notes/releases/v0.2.0.md \
+     dist/*.whl dist/*.tar.gz
+
+The tag must point at the release commit. PyPI publication is a separate
+maintainer decision; do not publish externally without explicit approval.
+
 Do not commit multi-GB arrays to ordinary git history. Release assets or LFS are
-the supported storage paths. The manifest paths are repository-relative; local
+the supported storage paths for caches. The manifest paths are repository-relative; local
 machine paths must not be published.
