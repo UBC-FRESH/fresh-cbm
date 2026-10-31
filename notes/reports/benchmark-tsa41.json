@@ -1,0 +1,14 @@
+{
+  "cache": "/srv/shared-data/gep/ws4/fresh-cbm/cache/tsa41-cc-offsets",
+  "states": 5273,
+  "accounts": 26,
+  "offsets": 50,
+  "dtype": "float64",
+  "bytes": 2852792991,
+  "load_seconds": 0.017732908949255943,
+  "lookup_seconds": 0.000852508470416069,
+  "lookup_repeats": 100,
+  "blocks": 148828,
+  "cells": 1,
+  "effect_seconds": 2.325602291151881
+}

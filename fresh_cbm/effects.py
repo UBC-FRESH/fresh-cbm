@@ -137,7 +137,10 @@ def build_block_effects(
             (int(str(row.track_id)), int(str(row.age)), float(str(row.area_ha)))
         )
 
-    if not family or not family.allow_empty:
+    if family is None:
+        if not bool(cache.manifest["empty"]):
+            raise ValueError("block effects need a cache that stores untreated states")
+    elif not family.allow_empty:
         raise ValueError("block effects need a cache that stores untreated states")
     empty = cache.array(-1)
     base = np.zeros(len(ordered_cells), dtype=np.float64)

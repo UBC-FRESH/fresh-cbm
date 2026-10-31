@@ -27,6 +27,7 @@ python -m pip install -e ".[test]"
 fresh-cbm-build --help
 fresh-cbm-validate --help
 fresh-cbm-package --help
+fresh-cbm-bench --help
 python -m pytest
 python scripts/dashboard.py
 sphinx-build -b html docs _build/html -W
@@ -59,6 +60,12 @@ https://github.com/UBC-FRESH/fresh-cbm/releases/tag/v0.1.0-tsa41
 
 Release:
 https://github.com/UBC-FRESH/fresh-cbm/releases/tag/v0.1.0-tsa08
+
+## Benchmarks
+
+`fresh-cbm-bench` measures load, lookup, projection, and storage. On the published
+TSA41 cache, projection over 148,828 blocks took **2.33 s**; TSA08 over 371,565
+blocks took **4.96 s**. See `docs/guides/benchmarks.rst`.
 
 ## How this project works
 

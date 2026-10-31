@@ -10,6 +10,7 @@ The API reference is generated from the package docstrings and annotations.
    schema
    family
    effects
+   benchmark
    commands
    check-workflow
    dashboard
