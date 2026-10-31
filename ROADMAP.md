@@ -11,7 +11,7 @@ Every phase starts as `planned` with `Parent issue: TBD`. Activate a phase only 
 | P0 Bootstrap | #1 | `feature/p0-workflow-bootstrap` | complete |
 | P1 Scope and design | #5 | `feature/p1-docs-context` | complete |
 | P2 Contracts and prototype | #9 | `feature/p2-package-cli` | complete |
-| P3 Build | TBD | `feature/p3-build` | planned |
+| P3 Build | #13 | `feature/p3-chain-family` | active |
 | P4 Verify | TBD | `feature/p4-verify` | planned |
 | P5 Release and deploy | TBD | `feature/p5-release` | planned |
 | P6 Operate and maintain | TBD | `feature/p6-operate` | planned |
@@ -93,17 +93,24 @@ Acceptance criteria:
 
 ## Phase 3: Build
 
-Parent issue: TBD
-Branch: `feature/p3-build`
-Status: planned
+Parent issue: #13
+Branch: `feature/p3-chain-family`
+Status: active
 
-Goal: implement the agreed scope, one task at a time, on the phase branch.
+Goal: make cache coverage an explicit contract and add a reusable consumer projection.
 
-- [ ] P3.1 Implement the first build task
+- [x] P3.1 Formalize supported chain families and reject unsupported chains
+- [ ] P3.2 Add a reusable cache-to-effects adapter
+- [ ] P3.3 Build and validate a second package/TSA cache
+- [ ] P3.4 Benchmark build, lookup, storage, and consumer overhead
 
 Acceptance criteria:
 
-- <State the criterion that shows this phase met its goal.>
+- declared chain families are explicit in the manifest and client
+- unsupported chains fail with a clear error
+- the consumer adapter is independent of WS4 internals
+- a second cache validates with zero error
+- dashboard, docs, and CI pass
 
 ## Phase 4: Verify
 
