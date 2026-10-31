@@ -56,3 +56,7 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
   projection over 148,828 blocks. TSA08: 2.03 GB, 3,761 states, 0.032 s load,
   1.18 ms lookup, 4.96 s projection over 371,565 blocks. Evidence:
   `notes/reports/p3-4-benchmarks.md`.
+
+- P3 close-out: chain-family contract, reusable effect projection, TSA08 cache,
+  and cache/projection benchmarks are merged. Parent issue #13 closed; P4 is
+  planned in `ROADMAP.md`. Dashboard and docs green.
