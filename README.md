@@ -49,6 +49,17 @@ the WS4 source root on `PYTHONPATH`; the client and tests do not.
 Release:
 https://github.com/UBC-FRESH/fresh-cbm/releases/tag/v0.1.0-tsa41
 
+`v0.1.0-tsa08` is the second package cache:
+
+- 3,761 TSA08 track/age states
+- untreated + `CC@0..49`
+- 50 years, 26 accounts, float64
+- 2.03 GB
+- build 2h05; validation 102 rows, max absolute error 0
+
+Release:
+https://github.com/UBC-FRESH/fresh-cbm/releases/tag/v0.1.0-tsa08
+
 ## How this project works
 
 This project follows the UBC-FRESH dev workflow. Work is planned as phases,

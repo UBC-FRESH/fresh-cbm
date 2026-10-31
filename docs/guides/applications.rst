@@ -60,6 +60,13 @@ time was dominated by exact replay.
 These numbers are **validation evidence for the cache**, not a policy
 recommendation.
 
+The second package cache is TSA08:
+
+- release: https://github.com/UBC-FRESH/fresh-cbm/releases/tag/v0.1.0-tsa08
+- 3,761 states, 51 chains, 2.03 GB
+- build 2h05
+- validation: 102 rows, max absolute error 0
+
 Typical workflow
 ----------------
 
