@@ -100,7 +100,7 @@ Status: active
 Goal: make cache coverage an explicit contract and add a reusable consumer projection.
 
 - [x] P3.1 Formalize supported chain families and reject unsupported chains
-- [ ] P3.2 Add a reusable cache-to-effects adapter
+- [x] P3.2 Add a reusable cache-to-effects adapter
 - [ ] P3.3 Build and validate a second package/TSA cache
 - [ ] P3.4 Benchmark build, lookup, storage, and consumer overhead
 
