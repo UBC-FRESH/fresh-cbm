@@ -108,7 +108,7 @@ history; use release assets or LFS.
 - 55 release assets
 - validation: 102 sampled state/offset rows, max absolute error 0
 
-Release:
+Repository and release are public:
 https://github.com/UBC-FRESH/fresh-cbm/releases/tag/v0.1.0-tsa41
 
 ## Status
