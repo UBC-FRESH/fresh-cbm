@@ -17,8 +17,8 @@ Start with the cache format, building, and validation guides.
 
 ## Status
 
-Phase P0 (workflow bootstrap and documentation) is active. `ROADMAP.md` is the
-plan of record.
+Phase P0 (workflow bootstrap and documentation) is complete. `ROADMAP.md` is the
+plan of record; P1 is planned.
 
 ## Quick start
 
