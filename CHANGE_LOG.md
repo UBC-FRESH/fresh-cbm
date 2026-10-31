@@ -16,3 +16,7 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
 - P1.1 context and architecture docs: added `guides/context`, `guides/applications`,
   and `reference/architecture`; expanded the README with target applications and
   non-goals; updated the docs index and `llms.txt`. Dashboard: GREEN.
+
+- P1 close-out: PR #7 squash-merged as `5d2137b`. Context, applications, and
+  architecture pages are live; dashboard and docs are green. Parent issue #5 and
+  task #6 closed. Next phase is planned in `ROADMAP.md`.
