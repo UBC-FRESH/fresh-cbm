@@ -8,7 +8,7 @@ Every phase starts as `planned` with `Parent issue: TBD`. Activate a phase only 
 
 | Phase | Parent issue | Branch | Status |
 | --- | --- | --- | --- |
-| P0 Bootstrap | #1 | `feature/p0-workflow-bootstrap` | active |
+| P0 Bootstrap | #1 | `feature/p0-workflow-bootstrap` | complete |
 | P1 Scope and design | TBD | `feature/p1-scope-design` | planned |
 | P2 Contracts and prototype | TBD | `feature/p2-contracts-prototype` | planned |
 | P3 Build | TBD | `feature/p3-build` | planned |
@@ -37,14 +37,14 @@ Every phase starts as `planned` with `Parent issue: TBD`. Activate a phase only 
 
 Parent issue: #1
 Branch: `feature/p0-workflow-bootstrap`
-Status: active
+Status: complete
 
 Goal: adapt the UBC-FRESH workflow to fresh-cbm, add the Sphinx site, and make the first pull request reviewable.
 
-- [ ] P0.1 Adapt `AGENTS.md`, `README.md`, `ROADMAP.md`, `CHANGE_LOG.md`, and `notes/`
-- [ ] P0.2 Add Sphinx docs and the GitHub Pages deploy workflow
-- [ ] P0.3 Add the workflow validator, dashboard, CI, and pre-commit parity
-- [ ] P0.4 Verify the docs build and the published Pages site
+- [x] P0.1 Adapt `AGENTS.md`, `README.md`, `ROADMAP.md`, `CHANGE_LOG.md`, and `notes/`
+- [x] P0.2 Add Sphinx docs and the GitHub Pages deploy workflow
+- [x] P0.3 Add the workflow validator, dashboard, CI, and pre-commit parity
+- [x] P0.4 Verify the docs build and the published Pages site
 
 Acceptance criteria:
 
