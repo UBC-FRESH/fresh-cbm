@@ -74,3 +74,8 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
 - P5.1 package release: bumped `fresh-cbm` to 0.2.0, added release notes, expanded
   the release guide with package build/tag/GitHub commands, and explicitly kept
   PyPI publication as a separate maintainer decision.
+
+- P5 close-out: `fresh-cbm` 0.2.0 wheel/sdist release published on GitHub at
+  `v0.2.0`; tag target `d45799a`. PyPI publication was not performed and remains
+  a separate maintainer decision. Parent issue #29 closed. Dashboard and docs
+  green.
