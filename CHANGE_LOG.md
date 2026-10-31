@@ -37,3 +37,9 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
   reject family/offset/empty-policy mismatches. Legacy manifests without a family
   still load. Builder options include `--treatment`, `--events`, and `--no-empty`;
   more than one event is rejected. Dashboard: GREEN.
+
+- P3.2 reusable effect adapter: added `fresh_cbm.effects.build_block_effects` and
+  `BlockEffects`. It maps cached state rows through block fragments and area
+  weights to target cells without importing WS4, supports multi-fragment blocks,
+  and validates cells, tracks, ages, and chain offsets. Tests cover aggregation,
+  totals, and invalid inputs. Dashboard: GREEN.

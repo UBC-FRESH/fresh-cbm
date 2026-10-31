@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import numpy as np
 import pandas as pd
@@ -159,6 +159,22 @@ class StateCache:
             raise KeyError(f"state not in cache: track={track_id} age={age}")
         return int(match.iloc[0]["state_id"])
 
+    def array(self, chain_offset: int = -1) -> np.ndarray:
+        """Return the memmapped values for one chain offset.
+
+        Parameters
+        ----------
+        chain_offset : int, optional
+            Single ``CC`` event offset; ``-1`` is untreated.
+
+        Returns
+        -------
+        numpy.ndarray
+            The cached values with shape ``(states, years + 1, accounts)``.
+        """
+        name = "empty.npy" if chain_offset < 0 else f"offset_{chain_offset:02d}.npy"
+        return cast(np.ndarray, np.load(self.root / "values" / name, mmap_mode="r"))
+
     def lookup_state(self, state_id: int, chain_offset: int = -1) -> np.ndarray:
         """Return one state's ``(years + 1, accounts)`` array.
 
@@ -174,9 +190,7 @@ class StateCache:
         numpy.ndarray
             The cached accounts.
         """
-        name = "empty.npy" if chain_offset < 0 else f"offset_{chain_offset:02d}.npy"
-        values = np.load(self.root / "values" / name, mmap_mode="r")
-        return np.asarray(values[int(state_id)])
+        return np.asarray(self.array(chain_offset)[int(state_id)])
 
     def lookup(self, track_id: int, age: int, chain_offset: int = -1) -> np.ndarray:
         """Return one state's ``(years + 1, accounts)`` array.

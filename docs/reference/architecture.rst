@@ -63,8 +63,10 @@ declared order.
 Consumer
 ~~~~~~~~
 
-WS4's `ws4 carbon-removal --state-cache` combines cached carbon cells with
-non-carbon cells from the WS4 simulator. It creates an exact per-block effect
+`fresh_cbm.effects.build_block_effects` applies fragment area weights and maps
+cached states to target cells. WS4's `ws4 carbon-removal --state-cache` uses that
+projection for carbon cells and combines it with non-carbon cells from the WS4
+simulator. It creates an exact per-block effect
 table, searches it, and replays the winning schedule through the exact carbon
 path.
 

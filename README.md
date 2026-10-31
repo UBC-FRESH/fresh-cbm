@@ -65,7 +65,7 @@ tasks, and subtasks in `ROADMAP.md`, mirrored in GitHub issues, and recorded in
 | `CHANGE_LOG.md` | Dated narrative of changes |
 | `docs/` | Sphinx site, published to GitHub Pages |
 | `notes/` | Decisions and focused plans |
-| `fresh_cbm/` | Python client and manifest schema |
+| `fresh_cbm/` | Python client, manifest schema, family contract, and effect projection |
 | `scripts/` | Builder, validator, workflow validator, and dashboard |
 | `tests/` | pytest suite |
 
