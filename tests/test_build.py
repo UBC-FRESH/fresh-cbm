@@ -66,6 +66,9 @@ def test_build_writes_the_cache_contract(tmp_path: Path, monkeypatch: pytest.Mon
         hwp_config=None,
         years=1,
         offsets="0",
+        treatment="CC",
+        events=1,
+        no_empty=False,
         workers=1,
         dtype="float64",
         limit=None,
@@ -77,6 +80,30 @@ def test_build_writes_the_cache_contract(tmp_path: Path, monkeypatch: pytest.Mon
     assert (out / "values" / "empty.npy").is_file()
     assert (out / "values" / "offset_00.npy").is_file()
     assert build.parse_offsets("0,2-3") == [0, 2, 3]
+    manifest = __import__("json").loads((out / "manifest.json").read_text())
+    assert manifest["chain_family"]["treatment"] == "CC"
+    assert manifest["chain_family"]["events"] == 1
+
+
+def test_build_rejects_multiple_events(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """The builder rejects a chain family outside the one-event contract."""
+    _fake_ws4(monkeypatch)
+    args = Namespace(
+        dataset="dataset",
+        package="package",
+        hwp_config=None,
+        years=1,
+        offsets="0",
+        treatment="CC",
+        events=2,
+        no_empty=False,
+        workers=1,
+        dtype="float64",
+        limit=None,
+        out=str(tmp_path / "cache"),
+    )
+    with pytest.raises(ValueError, match="one-event"):
+        build.build(args)
 
 
 def test_build_main_help(monkeypatch: pytest.MonkeyPatch) -> None:

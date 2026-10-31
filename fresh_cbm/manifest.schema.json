@@ -18,37 +18,118 @@
     "files"
   ],
   "properties": {
-    "schema": {"const": "fresh-cbm-state-v1"},
-    "created": {"type": "string"},
-    "dataset": {"type": "string", "minLength": 1},
-    "package": {"type": "string", "minLength": 1},
-    "package_fingerprint": {"type": "string", "minLength": 1},
-    "libcbm_version": {"type": "string", "minLength": 1},
-    "cbm_defaults_sha256": {"type": "string", "minLength": 1},
-    "years": {"type": "integer", "minimum": 1},
-    "dtype": {"enum": ["float32", "float64"]},
+    "schema": {
+      "const": "fresh-cbm-state-v1"
+    },
+    "created": {
+      "type": "string"
+    },
+    "dataset": {
+      "type": "string",
+      "minLength": 1
+    },
+    "package": {
+      "type": "string",
+      "minLength": 1
+    },
+    "package_fingerprint": {
+      "type": "string",
+      "minLength": 1
+    },
+    "libcbm_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cbm_defaults_sha256": {
+      "type": "string",
+      "minLength": 1
+    },
+    "years": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "dtype": {
+      "enum": [
+        "float32",
+        "float64"
+      ]
+    },
     "accounts": {
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
-      "items": {"type": "string", "minLength": 1}
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
     },
     "offsets": {
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
-      "items": {"type": "integer", "minimum": 0}
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      }
     },
-    "empty": {"type": "boolean"},
-    "states": {"type": "integer", "minimum": 1},
+    "empty": {
+      "type": "boolean"
+    },
+    "states": {
+      "type": "integer",
+      "minimum": 1
+    },
     "files": {
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
-      "items": {"type": "string", "minLength": 1}
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
     },
-    "build_seconds": {"type": "number", "minimum": 0},
-    "hwp_config": {"type": ["string", "null"]}
+    "build_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "hwp_config": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "chain_family": {
+      "type": "object",
+      "required": [
+        "treatment",
+        "events",
+        "offsets",
+        "allow_empty"
+      ],
+      "properties": {
+        "treatment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "events": {
+          "type": "integer",
+          "const": 1
+        },
+        "offsets": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "allow_empty": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
   },
   "additionalProperties": true
 }

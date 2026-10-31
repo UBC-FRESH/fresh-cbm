@@ -10,6 +10,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
+from .family import ChainFamily
 from .schema import load_manifest
 
 
@@ -74,6 +75,15 @@ class StateCache:
         years = self.years
         accounts = len(self.accounts)
         expected = (states, years + 1, accounts)
+        family = self.chain_family
+        offsets = self.manifest["offsets"]
+        if not isinstance(offsets, list):
+            raise ValueError("manifest offsets must be a list")
+        if family is not None:
+            if tuple(int(value) for value in offsets) != family.offsets:
+                raise ValueError("chain_family offsets do not match manifest offsets")
+            if bool(self.manifest["empty"]) != family.allow_empty:
+                raise ValueError("chain_family empty policy does not match manifest")
         files = self.manifest["files"]
         if not isinstance(files, list):
             raise ValueError("manifest files must be a list")
@@ -113,6 +123,18 @@ class StateCache:
             actual = hashlib.sha256(target.read_bytes()).hexdigest()
             if actual != digest:
                 raise ValueError(f"checksum mismatch: {name}")
+
+    @property
+    def chain_family(self) -> ChainFamily | None:
+        """Return the declared chain family, if the manifest has one.
+
+        Returns
+        -------
+        ChainFamily or None
+            The family record, or None for a legacy manifest without one.
+        """
+        raw = self.manifest.get("chain_family")
+        return None if raw is None else ChainFamily.from_manifest(raw)
 
     @property
     def accounts(self) -> tuple[str, ...]:

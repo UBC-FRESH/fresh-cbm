@@ -15,7 +15,10 @@ chain offset.
 
 ``manifest.json`` is validated by the packaged JSON Schema. It records the
 source package, package fingerprint, libcbm version, CBM defaults hash, years,
-dtype, account names, offsets, state count, and file list.
+dtype, account names, offsets, state count, and file list. It also records the
+declared ``chain_family``: the treatment, event count, allowed offsets, and
+whether untreated rows are stored. Legacy manifests without a family still load;
+the client treats them as legacy and does not infer a family.
 
 ``index.parquet`` maps a row id to ``track_id``, ``track_name``, and ``age``.
 Every value array has shape ``(states, years + 1, accounts)``. The empty chain

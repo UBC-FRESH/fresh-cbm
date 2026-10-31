@@ -40,7 +40,7 @@ client and tests do not.
 `v0.1.0-tsa41` is the first published table:
 
 - 5,273 TSA41 track/age states
-- untreated + `CC@0..49`
+- declared family: untreated + one `CC` event at offsets `0..49`
 - 50 years, 26 carbon accounts, float64
 - 2.85 GB
 - 55 release assets
