@@ -39,3 +39,9 @@ def test_manifest_rejects_missing_fields() -> None:
     del broken["accounts"]
     with pytest.raises(ValueError, match="accounts"):
         validate_manifest(broken)
+
+
+def test_manifest_rejects_non_object() -> None:
+    """A manifest must be a JSON object."""
+    with pytest.raises(ValueError, match="JSON object"):
+        validate_manifest([])

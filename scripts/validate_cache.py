@@ -8,13 +8,14 @@ import random
 from pathlib import Path
 
 from fresh_cbm import StateCache
-from ws4.carbon.hwp import load_hwp_config
-from ws4.carbon.ledger import CarbonLedger
-from ws4.carbon.package import load_carbon_package
 
 
 def main() -> None:
     """Compare sampled cached rows with an exact ledger run."""
+    from ws4.carbon.hwp import load_hwp_config
+    from ws4.carbon.ledger import CarbonLedger
+    from ws4.carbon.package import load_carbon_package
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--cache", required=True)
     parser.add_argument("--dataset", required=True)

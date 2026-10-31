@@ -16,14 +16,21 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from ws4.carbon.hwp import load_hwp_config
-from ws4.carbon.ledger import CarbonLedger
-from ws4.carbon.libcbm import cbm_defaults_reference, installed_libcbm_version
-from ws4.carbon.package import load_carbon_package, package_fingerprint
 
 
 def parse_offsets(text: str) -> list[int]:
-    """Parse ``0-49`` or ``0,1,2`` into offsets."""
+    """Parse ``0-49`` or ``0,1,2`` into offsets.
+
+    Parameters
+    ----------
+    text : str
+        Comma-separated offsets or ranges.
+
+    Returns
+    -------
+    list of int
+        Sorted unique offsets.
+    """
     values: list[int] = []
     for part in text.split(","):
         part = part.strip()
@@ -40,7 +47,18 @@ def parse_offsets(text: str) -> list[int]:
 
 
 def build(args: argparse.Namespace) -> None:
-    """Build the cache."""
+    """Build the cache.
+
+    Parameters
+    ----------
+    args : argparse.Namespace
+        Parsed builder arguments.
+    """
+    from ws4.carbon.hwp import load_hwp_config
+    from ws4.carbon.ledger import CarbonLedger
+    from ws4.carbon.libcbm import cbm_defaults_reference, installed_libcbm_version
+    from ws4.carbon.package import load_carbon_package, package_fingerprint
+
     out = Path(args.out)
     (out / "values").mkdir(parents=True, exist_ok=True)
     package = load_carbon_package(Path(args.package))

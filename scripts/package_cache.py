@@ -10,7 +10,18 @@ from pathlib import Path
 
 
 def sha256(path: Path) -> str:
-    """Return a file SHA-256 digest."""
+    """Return a file SHA-256 digest.
+
+    Parameters
+    ----------
+    path : Path
+        File to hash.
+
+    Returns
+    -------
+    str
+        Hexadecimal digest.
+    """
     digest = hashlib.sha256()
     with path.open("rb") as handle:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
