@@ -11,6 +11,7 @@ The API reference is generated from the package docstrings and annotations.
    family
    effects
    benchmark
+   verify
    commands
    check-workflow
    dashboard

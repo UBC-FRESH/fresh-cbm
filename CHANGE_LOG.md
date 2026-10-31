@@ -60,3 +60,9 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
 - P3 close-out: chain-family contract, reusable effect projection, TSA08 cache,
   and cache/projection benchmarks are merged. Parent issue #13 closed; P4 is
   planned in `ROADMAP.md`. Dashboard and docs green.
+
+- P4.1/P4.2 verification and release hardening: added `fresh-cbm-verify` for
+  offline shape/checksum/release checks; verified both public caches (TSA41
+  2.85 GB, TSA08 2.03 GB, checksums and release metadata consistent); added a CI
+  wheel/sdist install smoke job; and expanded the release checklist. Dashboard:
+  GREEN.
