@@ -27,3 +27,7 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
   `StateCache.validate` for index/state/file/shape checks and
   `StateCache.verify_checksums` for `SHA256SUMS`. Added command and integrity
   documentation and tests for malformed caches and checksums. Dashboard: GREEN.
+
+- P2 close-out: PR #11 squash-merged as `1a2b9d5`. Console entry points and
+  cache integrity checks are live; dashboard, docs, and CI are green. Parent
+  issue #9 and task #10 closed. Next phase is planned in `ROADMAP.md`.
