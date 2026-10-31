@@ -10,7 +10,7 @@ Every phase starts as `planned` with `Parent issue: TBD`. Activate a phase only 
 | --- | --- | --- | --- |
 | P0 Bootstrap | #1 | `feature/p0-workflow-bootstrap` | complete |
 | P1 Scope and design | #5 | `feature/p1-docs-context` | complete |
-| P2 Contracts and prototype | #9 | `feature/p2-package-cli` | active |
+| P2 Contracts and prototype | #9 | `feature/p2-package-cli` | complete |
 | P3 Build | TBD | `feature/p3-build` | planned |
 | P4 Verify | TBD | `feature/p4-verify` | planned |
 | P5 Release and deploy | TBD | `feature/p5-release` | planned |
@@ -76,13 +76,13 @@ Acceptance criteria:
 
 Parent issue: #9
 Branch: `feature/p2-package-cli`
-Status: active
+Status: complete
 
 Goal: make the package installable and fail-safe at the cache boundary.
 
-- [ ] P2.1 Add console entry points and cache integrity validation
-- [ ] P2.2 Document the entry points and integrity contract
-- [ ] P2.3 Verify installed-package behavior in CI
+- [x] P2.1 Add console entry points and cache integrity validation
+- [x] P2.2 Document the entry points and integrity contract
+- [x] P2.3 Verify installed-package behavior in CI
 
 Acceptance criteria:
 
