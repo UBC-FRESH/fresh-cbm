@@ -12,6 +12,7 @@
 - [Releasing a cache](guides/releasing.html): checksums, assets, and provenance.
 - [Architecture and data flow](reference/architecture.html): builder, cache, consumer, identity, and fallback.
 - [Validation contract](reference/validation.html): manifest and exactness requirements.
+- [Maintenance and compatibility](reference/maintenance.html): review cadence, versioning, rebuild triggers, and triage.
 - [API reference](api/index.html): the Python client and schema.
 
 ## API

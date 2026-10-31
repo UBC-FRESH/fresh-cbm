@@ -14,7 +14,7 @@ Every phase starts as `planned` with `Parent issue: TBD`. Activate a phase only 
 | P3 Build | #13 | `feature/p3-chain-family` | complete |
 | P4 Verify | #25 | `feature/p4-verification` | complete |
 | P5 Release and deploy | #29 | `feature/p5-release` | complete |
-| P6 Operate and maintain | TBD | `feature/p6-operate` | planned |
+| P6 Operate and maintain | #33 | `feature/p6-maintenance` | complete |
 
 ## Lifecycle Map
 
@@ -151,17 +151,23 @@ Acceptance criteria:
 
 ## Phase 6: Operate and maintain
 
-Parent issue: TBD
-Branch: `feature/p6-operate`
-Status: planned
+Parent issue: #33
+Branch: `feature/p6-maintenance`
+Status: complete
 
-Goal: keep the project current: triage incoming ideas, review on a cadence, and close out cleanly.
+Goal: keep the package current, compatible, and auditable.
 
-- [ ] P6.1 Set a review cadence and record the first review
+- [x] P6.1 Define maintenance and compatibility policy
+- [x] P6.2 Record the first maintenance review
+- [x] P6.3 Publish and close the phase
 
 Acceptance criteria:
 
-- <State the criterion that shows this phase met its goal.>
+- review cadence and owners are explicit
+- compatibility and deprecation rules are explicit
+- cache rebuild triggers are explicit
+- the first review is recorded
+- docs, dashboard, and CI pass
 
 ## Detailed Next Steps Notes
 
