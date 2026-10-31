@@ -9,7 +9,7 @@ Every phase starts as `planned` with `Parent issue: TBD`. Activate a phase only 
 | Phase | Parent issue | Branch | Status |
 | --- | --- | --- | --- |
 | P0 Bootstrap | #1 | `feature/p0-workflow-bootstrap` | complete |
-| P1 Scope and design | #5 | `feature/p1-docs-context` | active |
+| P1 Scope and design | #5 | `feature/p1-docs-context` | complete |
 | P2 Contracts and prototype | TBD | `feature/p2-contracts-prototype` | planned |
 | P3 Build | TBD | `feature/p3-build` | planned |
 | P4 Verify | TBD | `feature/p4-verify` | planned |
@@ -57,13 +57,13 @@ Acceptance criteria:
 
 Parent issue: #5
 Branch: `feature/p1-docs-context`
-Status: active
+Status: complete
 
 Goal: make the package understandable to a new reader: context, target applications, architecture, and boundaries.
 
-- [ ] P1.1 Add a context and target-applications guide
-- [ ] P1.2 Add an architecture and data-flow reference
-- [ ] P1.3 Add a worked application example, limitations, and FAQ
+- [x] P1.1 Add a context and target-applications guide
+- [x] P1.2 Add an architecture and data-flow reference
+- [x] P1.3 Add a worked application example, limitations, and FAQ
 
 Acceptance criteria:
 
