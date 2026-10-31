@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-import json
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 import numpy as np
 import pandas as pd
+
+from .schema import load_manifest
 
 
 @dataclass(frozen=True)
@@ -45,14 +46,17 @@ class StateCache:
             The loaded cache.
         """
         path = Path(root)
-        manifest = json.loads((path / "manifest.json").read_text(encoding="utf-8"))
+        manifest = load_manifest(path / "manifest.json")
         index = pd.read_parquet(path / "index.parquet")
         return cls(root=path, manifest=manifest, index=index)
 
     @property
     def accounts(self) -> tuple[str, ...]:
         """Return the cached account names."""
-        return tuple(str(value) for value in self.manifest["accounts"])
+        values = self.manifest["accounts"]
+        if not isinstance(values, list):
+            raise ValueError("manifest accounts must be a list")
+        return tuple(str(value) for value in values)
 
     @property
     def years(self) -> int:

@@ -73,6 +73,20 @@ row = cache.lookup(track_id=12, age=80, chain_offset=0)
 print(row.shape)  # (years + 1, accounts)
 ```
 
+## Development
+
+```bash
+python -m pip install -e ".[test]"
+ruff check .
+ruff format --check .
+mypy --strict fresh_cbm scripts tests
+pytest -q
+python -m build
+```
+
+CI runs these on Python 3.11 and 3.12. The builder and validator require WS4
+(`ws4[carbon]`) on `PYTHONPATH`; the client and its tests do not.
+
 ## Validation
 
 Every cache must record a source manifest and be validated by comparing a

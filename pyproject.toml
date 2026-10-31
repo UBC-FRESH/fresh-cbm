@@ -9,10 +9,28 @@ description = "Exact cached libcbm stand-state tables for WS4/FEMIC carbon"
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "Apache-2.0"}
-dependencies = ["numpy>=1.26", "pandas>=2.2", "pyarrow>=15"]
+dependencies = ["numpy>=1.26", "pandas>=2.2", "pyarrow>=15", "jsonschema>=4.20"]
+
+[project.optional-dependencies]
+test = ["pytest>=8", "types-jsonschema", "ruff>=0.5", "mypy>=1.10", "build>=1.2"]
 
 [tool.setuptools.packages.find]
 include = ["fresh_cbm*"]
+
+[tool.setuptools.package-data]
+fresh_cbm = ["manifest.schema.json"]
+
+[tool.mypy]
+strict = true
+files = ["fresh_cbm", "scripts", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["jsonschema"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["ws4", "ws4.*"]
+ignore_missing_imports = true
 
 [tool.ruff]
 line-length = 100

@@ -26,9 +26,19 @@ def test_lookup_reads_the_offset_file(tmp_path: Path) -> None:
     np.save(root / "values" / "offset_00.npy", values)
     np.save(root / "values" / "empty.npy", values + 100.0)
     manifest = {
+        "schema": "fresh-cbm-state-v1",
+        "dataset": "test",
+        "package": "test",
+        "package_fingerprint": "test",
+        "libcbm_version": "test",
+        "cbm_defaults_sha256": "test",
         "years": 2,
+        "dtype": "float64",
         "accounts": ["yield", "carbon"],
         "offsets": [0],
+        "empty": True,
+        "states": 2,
+        "files": ["values/empty.npy", "values/offset_00.npy"],
     }
     (root / "manifest.json").write_text(__import__("json").dumps(manifest))
     cache = StateCache.load(root)
