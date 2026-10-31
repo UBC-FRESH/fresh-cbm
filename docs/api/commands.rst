@@ -15,3 +15,7 @@ thin backward-compatible wrappers.
 .. automodule:: fresh_cbm.release
    :members:
    :show-inheritance:
+
+.. automodule:: fresh_cbm.verify
+   :members:
+   :show-inheritance:

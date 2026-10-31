@@ -12,6 +12,11 @@ Releasing a cache
    ``SHA256SUMS``, and ``release.json`` as release assets.
 4. Record the package fingerprint, CBM defaults hash, libcbm version, dtype,
    horizon, accounts, and state count in the release notes.
+5. Verify the uploaded cache offline:
+
+   .. code-block:: bash
+
+      fresh-cbm-verify --cache cache/tsa41-cc-offsets
 
 Do not commit multi-GB arrays to ordinary git history. Release assets or LFS are
 the supported storage paths. The manifest paths are repository-relative; local

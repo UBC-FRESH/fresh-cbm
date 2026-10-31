@@ -12,7 +12,7 @@ Every phase starts as `planned` with `Parent issue: TBD`. Activate a phase only 
 | P1 Scope and design | #5 | `feature/p1-docs-context` | complete |
 | P2 Contracts and prototype | #9 | `feature/p2-package-cli` | complete |
 | P3 Build | #13 | `feature/p3-chain-family` | complete |
-| P4 Verify | TBD | `feature/p4-verify` | planned |
+| P4 Verify | #25 | `feature/p4-verification` | active |
 | P5 Release and deploy | TBD | `feature/p5-release` | planned |
 | P6 Operate and maintain | TBD | `feature/p6-operate` | planned |
 
@@ -114,17 +114,23 @@ Acceptance criteria:
 
 ## Phase 4: Verify
 
-Parent issue: TBD
-Branch: `feature/p4-verify`
-Status: planned
+Parent issue: #25
+Branch: `feature/p4-verification`
+Status: active
 
-Goal: show that the build meets its acceptance criteria, and record the evidence in the changelog.
+Goal: make release verification executable and repeatable.
 
-- [ ] P4.1 Run the acceptance checks and record the evidence
+- [x] P4.1 Add cache verification and package smoke tests
+- [x] P4.2 Harden the release checklist and provenance docs
+- [x] P4.3 Verify both published cache releases
 
 Acceptance criteria:
 
-- <State the criterion that shows this phase met its goal.>
+- a cache can be verified without WS4
+- a built wheel installs in a clean environment and exposes every command
+- the release guide is executable end to end
+- TSA41 and TSA08 pass verification
+- dashboard, docs, and CI pass
 
 ## Phase 5: Release and deploy
 

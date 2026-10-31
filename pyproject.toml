@@ -16,6 +16,7 @@ fresh-cbm-build = "fresh_cbm.build:main"
 fresh-cbm-validate = "fresh_cbm.validate:main"
 fresh-cbm-package = "fresh_cbm.release:main"
 fresh-cbm-bench = "fresh_cbm.benchmark:main"
+fresh-cbm-verify = "fresh_cbm.verify:main"
 
 [project.optional-dependencies]
 test = [
