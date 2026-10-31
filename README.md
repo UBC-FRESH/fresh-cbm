@@ -32,8 +32,8 @@ python scripts/dashboard.py
 sphinx-build -b html docs _build/html -W
 ```
 
-The builder and validator require WS4 (`ws4[carbon]`) on `PYTHONPATH`; the
-client and tests do not.
+The builder and validator require WS4 (`ws4[carbon]`). Pass `--ws4-path` or put
+the WS4 source root on `PYTHONPATH`; the client and tests do not.
 
 ## Available cache
 

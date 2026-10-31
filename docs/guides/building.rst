@@ -10,11 +10,13 @@ track/age inventory and treatment transitions, a carbon package, and libcbm.
      --dataset /path/to/compiled-dataset \
      --package /path/to/femic-carbon-package \
      --hwp-config /path/to/hwp.bc.yaml \
+     --ws4-path /path/to/ws4 \
      --years 50 --offsets 0-49 --workers 64 \
      --out cache/tsa41-cc-offsets
 
-The builder still needs WS4 with the ``carbon`` extra on ``PYTHONPATH``. The
-console command is installed by ``pip install -e .``.
+The builder needs WS4 with the ``carbon`` extra. Pass ``--ws4-path`` or put the
+WS4 source root on ``PYTHONPATH``. The console command is installed by
+``pip install -e .``.
 
 Use ``--limit`` and ``--offsets`` for a pilot. The builder clears the
 in-process state cache between offsets so memory stays bounded.

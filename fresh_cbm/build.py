@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import time
 from collections.abc import Sequence
 from datetime import UTC, datetime
@@ -55,11 +56,25 @@ def build(args: argparse.Namespace) -> None:
     ----------
     args : argparse.Namespace
         Parsed builder arguments.
+
+    Raises
+    ------
+    RuntimeError
+        When WS4 is not importable on the current path.
     """
-    from ws4.carbon.hwp import load_hwp_config
-    from ws4.carbon.ledger import CarbonLedger
-    from ws4.carbon.libcbm import cbm_defaults_reference, installed_libcbm_version
-    from ws4.carbon.package import load_carbon_package, package_fingerprint
+    ws4_path = getattr(args, "ws4_path", None)
+    if ws4_path:
+        sys.path.insert(0, str(ws4_path))
+    try:
+        from ws4.carbon.hwp import load_hwp_config
+        from ws4.carbon.ledger import CarbonLedger
+        from ws4.carbon.libcbm import cbm_defaults_reference, installed_libcbm_version
+        from ws4.carbon.package import load_carbon_package, package_fingerprint
+    except ImportError as exc:  # pragma: no cover - depends on optional installation
+        raise RuntimeError(
+            "fresh-cbm-build needs WS4 with the carbon extra; pass --ws4-path "
+            "or set PYTHONPATH to the WS4 source root"
+        ) from exc
 
     out = Path(args.out)
     (out / "values").mkdir(parents=True, exist_ok=True)
@@ -172,9 +187,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--treatment", default="CC")
     parser.add_argument("--events", type=int, default=1)
     parser.add_argument("--no-empty", action="store_true")
+    parser.add_argument(
+        "--ws4-path",
+        help="WS4 source root to add to sys.path when running the builder",
+    )
     parser.add_argument("--workers", type=int, default=32)
     parser.add_argument("--dtype", choices=["float32", "float64"], default="float64")
     parser.add_argument("--limit", type=int)
     parser.add_argument("--out", required=True)
-    build(parser.parse_args(argv))
+    try:
+        build(parser.parse_args(argv))
+    except RuntimeError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
     return 0
