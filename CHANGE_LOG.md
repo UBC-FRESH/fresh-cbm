@@ -43,3 +43,10 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
   weights to target cells without importing WS4, supports multi-fragment blocks,
   and validates cells, tracks, ages, and chain offsets. Tests cover aggregation,
   totals, and invalid inputs. Dashboard: GREEN.
+
+- P3.3 second package cache: built and released TSA08, 3,761 states × 51 chains,
+  2.03 GB, in 7,551.7 s. Validation of 102 sampled rows had max absolute error
+  zero. Release:
+  https://github.com/UBC-FRESH/fresh-cbm/releases/tag/v0.1.0-tsa08. Also added
+  `--ws4-path` to the builder/validator so the installed commands fail clearly
+  when WS4 is absent. Evidence: `notes/reports/p3-3-tsa08-cache.md`.

@@ -77,6 +77,8 @@ def test_validate_command_checks_a_cache(tmp_path: Path, monkeypatch: pytest.Mon
                 "package",
                 "--samples",
                 "1",
+                "--ws4-path",
+                str(tmp_path),
                 "--workers",
                 "1",
             ]
