@@ -6,7 +6,7 @@ Releasing a cache
 
    .. code-block:: bash
 
-      python scripts/package_cache.py --cache cache/tsa41-cc-offsets
+      fresh-cbm-package --cache cache/tsa41-cc-offsets
 
 3. Upload ``manifest.json``, ``index.parquet``, every ``values/*.npy``,
    ``SHA256SUMS``, and ``release.json`` as release assets.

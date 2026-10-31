@@ -11,6 +11,11 @@ requires-python = ">=3.11"
 license = {text = "Apache-2.0"}
 dependencies = ["numpy>=1.26", "pandas>=2.2", "pyarrow>=15", "jsonschema>=4.20"]
 
+[project.scripts]
+fresh-cbm-build = "fresh_cbm.build:main"
+fresh-cbm-validate = "fresh_cbm.validate:main"
+fresh-cbm-package = "fresh_cbm.release:main"
+
 [project.optional-dependencies]
 test = [
   "pytest>=8",
