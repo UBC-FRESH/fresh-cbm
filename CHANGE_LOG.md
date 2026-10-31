@@ -12,3 +12,7 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
 - P0 close-out: PR #2 squash-merged as `732e874`. CI and the docs deploy are
   green. The published site is https://ubc-fresh.github.io/fresh-cbm/. Parent
   issue #1 closed. Next phase is planned in `ROADMAP.md`.
+
+- P1.1 context and architecture docs: added `guides/context`, `guides/applications`,
+  and `reference/architecture`; expanded the README with target applications and
+  non-goals; updated the docs index and `llms.txt`. Dashboard: GREEN.

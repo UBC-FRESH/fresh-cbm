@@ -5,9 +5,12 @@
 ## Start here
 
 - [Home](index.html): the documentation home.
+- [Context and target applications](guides/context.html): the problem, users, target applications, and non-goals.
+- [Applications and worked example](guides/applications.html): TSA41, the consumer path, invalidation, and FAQ.
 - [Cache format](guides/cache-format.html): manifest, index, values, and the state-not-blocks rule.
 - [Building a cache](guides/building.html): builder, pilot, and exact validation.
 - [Releasing a cache](guides/releasing.html): checksums, assets, and provenance.
+- [Architecture and data flow](reference/architecture.html): builder, cache, consumer, identity, and fallback.
 - [Validation contract](reference/validation.html): manifest and exactness requirements.
 - [API reference](api/index.html): the Python client and schema.
 

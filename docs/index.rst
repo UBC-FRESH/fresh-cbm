@@ -41,6 +41,10 @@ RTFM map
 
    * - If you need to
      - Read
+   * - Understand why the package exists and who it serves
+     - :doc:`guides/context`
+   * - See a worked application
+     - :doc:`guides/applications`
    * - Understand the cache contract
      - :doc:`guides/cache-format`
    * - Build or validate a cache
