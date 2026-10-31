@@ -11,7 +11,7 @@ Every phase starts as `planned` with `Parent issue: TBD`. Activate a phase only 
 | P0 Bootstrap | #1 | `feature/p0-workflow-bootstrap` | complete |
 | P1 Scope and design | #5 | `feature/p1-docs-context` | complete |
 | P2 Contracts and prototype | #9 | `feature/p2-package-cli` | complete |
-| P3 Build | #13 | `feature/p3-chain-family` | active |
+| P3 Build | #13 | `feature/p3-chain-family` | complete |
 | P4 Verify | TBD | `feature/p4-verify` | planned |
 | P5 Release and deploy | TBD | `feature/p5-release` | planned |
 | P6 Operate and maintain | TBD | `feature/p6-operate` | planned |
@@ -95,7 +95,7 @@ Acceptance criteria:
 
 Parent issue: #13
 Branch: `feature/p3-chain-family`
-Status: active
+Status: complete
 
 Goal: make cache coverage an explicit contract and add a reusable consumer projection.
 
