@@ -97,6 +97,20 @@ This verifies every file named in `manifest.json` and writes `SHA256SUMS` and
 manifest as release assets. Do not commit multi-GB arrays to ordinary git
 history; use release assets or LFS.
 
+## Available cache
+
+`v0.1.0-tsa41` is the first published table:
+
+- 5,273 TSA41 track/age states
+- untreated + `CC@0..49`
+- 50 years, 26 carbon accounts, float64
+- 2.85 GB
+- 55 release assets
+- validation: 102 sampled state/offset rows, max absolute error 0
+
+Release:
+https://github.com/UBC-FRESH/fresh-cbm/releases/tag/v0.1.0-tsa41
+
 ## Status
 
 This repository is new. The first target is TSA41, one-event `CC@offset` chains,
