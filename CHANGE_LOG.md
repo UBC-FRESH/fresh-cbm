@@ -50,3 +50,9 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
   https://github.com/UBC-FRESH/fresh-cbm/releases/tag/v0.1.0-tsa08. Also added
   `--ws4-path` to the builder/validator so the installed commands fail clearly
   when WS4 is absent. Evidence: `notes/reports/p3-3-tsa08-cache.md`.
+
+- P3.4 benchmarks: added `fresh-cbm-bench` and measured both published caches.
+  TSA41: 2.85 GB, 5,273 states, 0.018 s load, 0.85 ms median lookup, 2.33 s
+  projection over 148,828 blocks. TSA08: 2.03 GB, 3,761 states, 0.032 s load,
+  1.18 ms lookup, 4.96 s projection over 371,565 blocks. Evidence:
+  `notes/reports/p3-4-benchmarks.md`.

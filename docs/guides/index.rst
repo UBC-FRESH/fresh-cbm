@@ -8,4 +8,5 @@ Guides
    applications
    cache-format
    building
+   benchmarks
    releasing

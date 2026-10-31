@@ -20,4 +20,5 @@
 - [fresh_cbm.schema](api/schema.html): manifest schema validation.
 - [fresh_cbm.family](api/family.html): declared chain-family contract.
 - [fresh_cbm.effects](api/effects.html): block/fragment area-weighted effect projection.
+- [fresh_cbm.benchmark](api/benchmark.html): cache load, lookup, projection, and storage measurements.
 - [Commands](api/commands.html): build, validate, and package entry points.
