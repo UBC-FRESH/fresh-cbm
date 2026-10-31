@@ -19,4 +19,5 @@
 - [fresh_cbm](api/fresh-cbm.html): state lookup client.
 - [fresh_cbm.schema](api/schema.html): manifest schema validation.
 - [fresh_cbm.family](api/family.html): declared chain-family contract.
+- [fresh_cbm.effects](api/effects.html): block/fragment area-weighted effect projection.
 - [Commands](api/commands.html): build, validate, and package entry points.
