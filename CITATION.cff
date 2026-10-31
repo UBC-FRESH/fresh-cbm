@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this workflow template, please cite the repository."
+title: "fresh-cbm"
+abstract: "Exact cached libcbm stand-state tables and a lookup client for WS4/FEMIC carbon analyses."
+authors:
+  - name: "UBC FRESH Lab"
+repository-code: "https://github.com/UBC-FRESH/fresh-cbm"
+url: "https://ubc-fresh.github.io/fresh-cbm/"
+license: "Apache-2.0"
+version: "0.1.0"
+date-released: "2026-10-31"

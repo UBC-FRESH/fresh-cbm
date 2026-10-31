@@ -1,0 +1,17 @@
+# fresh-cbm
+
+> Exact cached libcbm stand-state tables and lookup client for WS4/FEMIC carbon analyses.
+
+## Start here
+
+- [Home](index.html): the documentation home.
+- [Cache format](guides/cache-format.html): manifest, index, values, and the state-not-blocks rule.
+- [Building a cache](guides/building.html): builder, pilot, and exact validation.
+- [Releasing a cache](guides/releasing.html): checksums, assets, and provenance.
+- [Validation contract](reference/validation.html): manifest and exactness requirements.
+- [API reference](api/index.html): the Python client and schema.
+
+## API
+
+- [fresh_cbm](api/fresh-cbm.html): state lookup client.
+- [fresh_cbm.schema](api/schema.html): manifest schema validation.

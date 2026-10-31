@@ -3,3 +3,7 @@ cache/
 !tests/fixtures/*.npy
 __pycache__/
 *.pyc
+_build/
+runtime/
+.coverage
+htmlcov/

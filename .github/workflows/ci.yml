@@ -1,32 +1,109 @@
 name: CI
 
 on:
-  push:
-    branches: [main]
   pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
 
 jobs:
-  checks:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.11", "3.12"]
+  quality:
+    name: Quality gates
+    runs-on: ubuntu-24.04
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.12"
           cache: pip
-      - name: Install
-        run: python -m pip install -e ".[test]"
+
+      - name: Install dev requirements
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
+
       - name: Lint
-        run: ruff check .
-      - name: Format
-        run: ruff format --check .
-      - name: Types
-        run: mypy --strict fresh_cbm scripts tests
-      - name: Tests
-        run: pytest -q
-      - name: Build
+        run: python -m ruff check .
+
+      - name: Format check
+        run: python -m ruff format --check .
+
+      - name: Types (mypy --strict)
+        run: python -m mypy
+
+      - name: Tests with coverage gate
+        run: python -m pytest
+
+      - name: Validate workflow surfaces
+        run: python scripts/check_workflow.py
+
+      - name: Build docs with warnings as errors
+        run: sphinx-build -b html docs _build/html -W
+
+      - name: Build package
         run: python -m build
+
+  dashboard:
+    name: Green dashboard summary
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dev requirements
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
+
+      - name: Run the dashboard
+        shell: bash
+        run: |
+          set +e
+          mkdir -p runtime
+          python scripts/dashboard.py --markdown --json runtime/dashboard.json > runtime/dashboard.md
+          status=$?
+          cat runtime/dashboard.md >> "$GITHUB_STEP_SUMMARY"
+          exit $status
+
+      - name: Upload the dashboard record
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: dashboard-record
+          path: runtime/dashboard.json
+
+  pre-commit:
+    name: Pre-commit parity
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dev requirements
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
+
+      - name: Run every pre-commit hook
+        run: pre-commit run --all-files --show-diff-on-failure

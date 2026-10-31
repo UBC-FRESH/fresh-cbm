@@ -12,7 +12,17 @@ license = {text = "Apache-2.0"}
 dependencies = ["numpy>=1.26", "pandas>=2.2", "pyarrow>=15", "jsonschema>=4.20"]
 
 [project.optional-dependencies]
-test = ["pytest>=8", "types-jsonschema", "pandas-stubs", "ruff>=0.5", "mypy>=1.10", "build>=1.2"]
+test = [
+  "pytest>=8",
+  "pytest-cov>=5",
+  "numpydoc>=1.7",
+  "hypothesis>=6.100",
+  "types-jsonschema",
+  "pandas-stubs",
+  "ruff>=0.5",
+  "mypy>=1.10",
+  "build>=1.2",
+]
 
 [tool.setuptools.packages.find]
 include = ["fresh_cbm*"]
@@ -22,7 +32,7 @@ fresh_cbm = ["manifest.schema.json"]
 
 [tool.mypy]
 strict = true
-files = ["fresh_cbm", "scripts", "tests"]
+files = ["fresh_cbm", "scripts", "tests", "docs/conf.py"]
 
 [[tool.mypy.overrides]]
 module = ["jsonschema"]
@@ -30,6 +40,10 @@ ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = ["ws4", "ws4.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["numpydoc", "numpydoc.*"]
 ignore_missing_imports = true
 
 [tool.ruff]
@@ -42,3 +56,18 @@ select = ["E", "W", "F", "I", "B", "UP", "D", "ANN", "N", "PT", "SIM", "RUF", "C
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]
+"docs/conf.py" = ["D", "ANN", "N"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=fresh_cbm --cov-branch --cov-report=term-missing --cov-fail-under=90"
+
+[tool.coverage.run]
+branch = true
+source = ["fresh_cbm"]
+
+[tool.coverage.report]
+show_missing = true
