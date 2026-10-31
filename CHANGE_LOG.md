@@ -66,3 +66,7 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
   2.85 GB, TSA08 2.03 GB, checksums and release metadata consistent); added a CI
   wheel/sdist install smoke job; and expanded the release checklist. Dashboard:
   GREEN.
+
+- P4 close-out: offline verification, wheel/sdist smoke tests, release checklist,
+  and both cache release checks are complete. Parent issue #25 closed. P5 is
+  planned in `ROADMAP.md`; dashboard and docs green.
