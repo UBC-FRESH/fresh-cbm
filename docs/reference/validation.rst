@@ -14,6 +14,13 @@ Manifest identity
 - dtype ``float32`` or ``float64``
 - unique accounts, offsets, and files
 
+Client integrity checks
+-----------------------
+
+``StateCache.load`` validates the index columns, state count, file set, and array
+shape. ``StateCache.verify_checksums`` additionally verifies every file against
+``SHA256SUMS``. A cache that fails either check must not be used.
+
 Exactness
 ---------
 

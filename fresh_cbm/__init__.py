@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -32,13 +33,15 @@ class StateCache:
     index: pd.DataFrame
 
     @classmethod
-    def load(cls, root: str | Path) -> StateCache:
+    def load(cls, root: str | Path, *, validate: bool = True) -> StateCache:
         """Load a cache directory.
 
         Parameters
         ----------
         root : path-like
             Cache directory.
+        validate : bool, optional
+            Check the index, file set, and array shapes. Defaults to True.
 
         Returns
         -------
@@ -48,7 +51,68 @@ class StateCache:
         path = Path(root)
         manifest = load_manifest(path / "manifest.json")
         index = pd.read_parquet(path / "index.parquet")
-        return cls(root=path, manifest=manifest, index=index)
+        cache = cls(root=path, manifest=manifest, index=index)
+        if validate:
+            cache.validate()
+        return cache
+
+    def validate(self) -> None:
+        """Check the index, file set, offsets, and array shapes.
+
+        Raises
+        ------
+        ValueError
+            When the cache is incomplete or inconsistent with its manifest.
+        """
+        required = {"state_id", "track_id", "track_name", "age"}
+        missing = required - set(self.index.columns)
+        if missing:
+            raise ValueError(f"cache index is missing columns: {sorted(missing)}")
+        states = int(self.manifest["states"])
+        if len(self.index) != states:
+            raise ValueError(f"cache index has {len(self.index)} rows but manifest says {states}")
+        years = self.years
+        accounts = len(self.accounts)
+        expected = (states, years + 1, accounts)
+        files = self.manifest["files"]
+        if not isinstance(files, list):
+            raise ValueError("manifest files must be a list")
+        for name in files:
+            if not isinstance(name, str):
+                raise ValueError("manifest file names must be strings")
+            path = self.root / name
+            if not path.is_file():
+                raise ValueError(f"cache file is missing: {name}")
+            array = np.load(path, mmap_mode="r")
+            if array.shape != expected:
+                raise ValueError(f"{name} has shape {array.shape}; expected {expected}")
+
+    def verify_checksums(self, path: str | Path | None = None) -> None:
+        """Verify files against a SHA256SUMS manifest.
+
+        Parameters
+        ----------
+        path : path-like or None, optional
+            Checksum file. Defaults to ``SHA256SUMS`` in the cache root.
+
+        Raises
+        ------
+        ValueError
+            When a file is missing or a digest does not match.
+        """
+        source = Path(path) if path is not None else self.root / "SHA256SUMS"
+        if not source.is_file():
+            raise ValueError(f"checksum file is missing: {source}")
+        for line in source.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            digest, name = line.split("  ", 1)
+            target = self.root / name
+            if not target.is_file():
+                raise ValueError(f"checksum target is missing: {name}")
+            actual = hashlib.sha256(target.read_bytes()).hexdigest()
+            if actual != digest:
+                raise ValueError(f"checksum mismatch: {name}")
 
     @property
     def accounts(self) -> tuple[str, ...]:

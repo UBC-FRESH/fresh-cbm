@@ -20,3 +20,10 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
 - P1 close-out: PR #7 squash-merged as `5d2137b`. Context, applications, and
   architecture pages are live; dashboard and docs are green. Parent issue #5 and
   task #6 closed. Next phase is planned in `ROADMAP.md`.
+
+- P2.1 package CLI and integrity: moved the builder, validator, and release logic
+  behind the `fresh-cbm-build`, `fresh-cbm-validate`, and `fresh-cbm-package`
+  console entry points; kept the scripts as compatibility wrappers. Added
+  `StateCache.validate` for index/state/file/shape checks and
+  `StateCache.verify_checksums` for `SHA256SUMS`. Added command and integrity
+  documentation and tests for malformed caches and checksums. Dashboard: GREEN.

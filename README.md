@@ -24,6 +24,9 @@ plan of record; P1 is planned.
 
 ```bash
 python -m pip install -e ".[test]"
+fresh-cbm-build --help
+fresh-cbm-validate --help
+fresh-cbm-package --help
 python -m pytest
 python scripts/dashboard.py
 sphinx-build -b html docs _build/html -W

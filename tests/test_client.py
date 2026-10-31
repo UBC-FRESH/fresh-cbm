@@ -88,3 +88,51 @@ def test_accounts_rejects_a_malformed_manifest() -> None:
     )
     with pytest.raises(ValueError, match="accounts"):
         _ = cache.accounts
+
+
+def _minimal_cache(root: Path, *, shape: tuple[int, ...] = (1, 3, 1)) -> None:
+    """Write a minimal valid cache at ``root``."""
+    (root / "values").mkdir(parents=True)
+    np.save(root / "values" / "empty.npy", np.zeros(shape))
+    np.save(root / "values" / "offset_00.npy", np.ones(shape))
+    index = pd.DataFrame({"state_id": [0], "track_id": [7], "track_name": ["a"], "age": [10]})
+    index.to_parquet(root / "index.parquet", index=False)
+    manifest = {
+        "schema": "fresh-cbm-state-v1",
+        "dataset": "test",
+        "package": "test",
+        "package_fingerprint": "test",
+        "libcbm_version": "test",
+        "cbm_defaults_sha256": "test",
+        "years": 2,
+        "dtype": "float64",
+        "accounts": ["yield"],
+        "offsets": [0],
+        "empty": True,
+        "states": 1,
+        "files": ["values/empty.npy", "values/offset_00.npy"],
+    }
+    (root / "manifest.json").write_text(__import__("json").dumps(manifest))
+
+
+def test_load_rejects_a_truncated_array(tmp_path: Path) -> None:
+    """A shape that does not match the manifest fails at load time."""
+    root = tmp_path / "cache"
+    _minimal_cache(root, shape=(1, 2, 1))
+    with pytest.raises(ValueError, match="expected"):
+        StateCache.load(root)
+
+
+def test_checksum_verification_detects_tampering(tmp_path: Path) -> None:
+    """A changed value file fails checksum verification."""
+    root = tmp_path / "cache"
+    _minimal_cache(root)
+    checksum = root / "SHA256SUMS"
+    empty = root / "values" / "empty.npy"
+    digest = __import__("hashlib").sha256(empty.read_bytes()).hexdigest()
+    checksum.write_text(f"{digest}  values/empty.npy\n")
+    cache = StateCache.load(root)
+    cache.verify_checksums()
+    empty.write_bytes(b"tampered")
+    with pytest.raises(ValueError, match="checksum mismatch"):
+        cache.verify_checksums()

@@ -10,7 +10,7 @@ Every phase starts as `planned` with `Parent issue: TBD`. Activate a phase only 
 | --- | --- | --- | --- |
 | P0 Bootstrap | #1 | `feature/p0-workflow-bootstrap` | complete |
 | P1 Scope and design | #5 | `feature/p1-docs-context` | complete |
-| P2 Contracts and prototype | TBD | `feature/p2-contracts-prototype` | planned |
+| P2 Contracts and prototype | #9 | `feature/p2-package-cli` | active |
 | P3 Build | TBD | `feature/p3-build` | planned |
 | P4 Verify | TBD | `feature/p4-verify` | planned |
 | P5 Release and deploy | TBD | `feature/p5-release` | planned |
@@ -74,18 +74,22 @@ Acceptance criteria:
 
 ## Phase 2: Contracts and prototype
 
-Parent issue: TBD
-Branch: `feature/p2-contracts-prototype`
-Status: planned
+Parent issue: #9
+Branch: `feature/p2-package-cli`
+Status: active
 
-Goal: define the interfaces and data contracts, then build the smallest prototype that exercises them.
+Goal: make the package installable and fail-safe at the cache boundary.
 
-- [ ] P2.1 Define the interface and data contracts in `docs/`
-- [ ] P2.2 Build a prototype that exercises the contracts on synthetic data
+- [ ] P2.1 Add console entry points and cache integrity validation
+- [ ] P2.2 Document the entry points and integrity contract
+- [ ] P2.3 Verify installed-package behavior in CI
 
 Acceptance criteria:
 
-- <State the criterion that shows this phase met its goal.>
+- `pip install -e .` exposes all three commands
+- malformed or truncated caches fail before lookup
+- checksum verification is available and tested
+- dashboard, docs, and CI pass
 
 ## Phase 3: Build
 
