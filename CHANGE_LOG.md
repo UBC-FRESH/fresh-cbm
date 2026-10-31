@@ -79,3 +79,11 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
   `v0.2.0`; tag target `d45799a`. PyPI publication was not performed and remains
   a separate maintainer decision. Parent issue #29 closed. Dashboard and docs
   green.
+
+- P6.1 maintenance: added the maintenance/compatibility policy, cache rebuild
+  triggers, triage rules, and the first maintenance review. Review cadence:
+  monthly health, quarterly dependency/compatibility, annual rebuild planning.
+  Next review 2026-11-30. Dashboard: GREEN.
+
+- P6 close-out: maintenance policy and first review published. All lifecycle
+  phases P0–P6 are complete. Parent issue #33 closed. Next review 2026-11-30.
