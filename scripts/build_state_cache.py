@@ -100,8 +100,8 @@ def build(args: argparse.Namespace) -> None:
     manifest = {
         "schema": "fresh-cbm-state-v1",
         "created": datetime.now(UTC).isoformat(),
-        "dataset": str(Path(args.dataset).resolve()),
-        "package": str(Path(args.package).resolve()),
+        "dataset": Path(args.dataset).name,
+        "package": Path(args.package).name,
         "package_fingerprint": package_fingerprint(package),
         "libcbm_version": installed_libcbm_version(),
         "cbm_defaults_sha256": cbm_defaults_reference().sha256,
@@ -113,7 +113,7 @@ def build(args: argparse.Namespace) -> None:
         "states": len(states),
         "files": ["values/empty.npy", *[f"values/offset_{offset:02d}.npy" for offset in offsets]],
         "build_seconds": time.perf_counter() - started,
-        "hwp_config": str(Path(args.hwp_config).resolve()) if args.hwp_config else None,
+        "hwp_config": Path(args.hwp_config).name if args.hwp_config else None,
     }
     (out / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     print(f"wrote {out} in {time.perf_counter() - started:.1f}s")
