@@ -136,3 +136,86 @@ def test_checksum_verification_detects_tampering(tmp_path: Path) -> None:
     empty.write_bytes(b"tampered")
     with pytest.raises(ValueError, match="checksum mismatch"):
         cache.verify_checksums()
+
+
+def _mutated_cache(root: Path, **manifest_updates: object) -> StateCache:
+    """Load a minimal cache with a mutated manifest and return it unvalidated."""
+    _minimal_cache(root)
+    manifest_path = root / "manifest.json"
+    import json
+
+    manifest = json.loads(manifest_path.read_text())
+    manifest.update(manifest_updates)
+    manifest_path.write_text(json.dumps(manifest))
+    return StateCache.load(root, validate=False)
+
+
+def test_validation_rejects_index_and_shape_problems(tmp_path: Path) -> None:
+    """Index, offsets, and file-list problems fail at the boundary."""
+    root = tmp_path / "cache"
+    _minimal_cache(root)
+    cache = StateCache.load(root, validate=False)
+    cache = StateCache(
+        root=cache.root, manifest=cache.manifest, index=cache.index.drop(columns=["age"])
+    )
+    with pytest.raises(ValueError, match="missing columns"):
+        cache.validate()
+
+    root2 = tmp_path / "cache2"
+    _minimal_cache(root2)
+    cache2 = StateCache.load(root2)
+    cache2.manifest["states"] = 2
+    with pytest.raises(ValueError, match="rows"):
+        cache2.validate()
+
+    root3 = tmp_path / "cache3"
+    _minimal_cache(root3)
+    cache3 = StateCache.load(root3)
+    cache3.manifest["offsets"] = "0"
+    with pytest.raises(ValueError, match="offsets"):
+        cache3.validate()
+
+
+def test_validation_rejects_bad_family_and_files(tmp_path: Path) -> None:
+    """Family mismatches and bad file lists fail with explicit errors."""
+    root = tmp_path / "cache"
+    _minimal_cache(root)
+    cache = StateCache.load(root)
+    cache.manifest["chain_family"] = {
+        "treatment": "CC",
+        "events": 1,
+        "offsets": [1],
+        "allow_empty": True,
+    }
+    with pytest.raises(ValueError, match="chain_family offsets"):
+        cache.validate()
+
+    root2 = tmp_path / "cache2"
+    _minimal_cache(root2)
+    cache2 = StateCache.load(root2)
+    cache2.manifest["files"] = ["values/empty.npy", 3]
+    with pytest.raises(ValueError, match="file names"):
+        cache2.validate()
+
+    root3 = tmp_path / "cache3"
+    _minimal_cache(root3)
+    cache3 = StateCache.load(root3)
+    cache3.manifest["files"] = ["values/missing.npy"]
+    with pytest.raises(ValueError, match="missing"):
+        cache3.validate()
+
+
+def test_checksum_rejects_missing_file_and_blank_lines(tmp_path: Path) -> None:
+    """Checksum verification rejects missing files and ignores blank lines."""
+    root = tmp_path / "cache"
+    _minimal_cache(root)
+    checksum = root / "SHA256SUMS"
+    with pytest.raises(ValueError, match="checksum file"):
+        StateCache.load(root).verify_checksums()
+
+    checksum.write_text("\n")
+    StateCache.load(root).verify_checksums()
+
+    checksum.write_text("abc  values/missing.npy\n")
+    with pytest.raises(ValueError, match="target is missing"):
+        StateCache.load(root).verify_checksums()

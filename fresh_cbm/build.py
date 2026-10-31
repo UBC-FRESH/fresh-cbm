@@ -17,6 +17,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from .family import ChainFamily
+
 
 def parse_offsets(text: str) -> list[int]:
     """Parse ``0-49`` or ``0,1,2`` into offsets.
@@ -91,11 +93,18 @@ def build(args: argparse.Namespace) -> None:
         }
     )
     index.to_parquet(out / "index.parquet", index=False)
-    offsets = parse_offsets(args.offsets)
+    family = ChainFamily(
+        treatment=args.treatment,
+        offsets=tuple(parse_offsets(args.offsets)),
+        events=args.events,
+        allow_empty=not args.no_empty,
+    )
+    offsets = family.offsets
+    build_offsets = [-1, *offsets] if family.allow_empty else list(offsets)
     started = time.perf_counter()
     accounts: tuple[str, ...] | None = None
-    for offset in [-1, *offsets]:
-        chain = () if offset < 0 else (("CC", int(offset)),)
+    for offset in build_offsets:
+        chain = () if offset < 0 else family.chain(offset)
         keys = {(int(row.track_id), int(row.age), chain) for row in states.itertuples(index=False)}
         step = time.perf_counter()
         ledger._prepare_units(keys)
@@ -126,10 +135,14 @@ def build(args: argparse.Namespace) -> None:
         "years": args.years,
         "dtype": str(np.dtype(args.dtype)),
         "accounts": list(accounts or ()),
-        "offsets": offsets,
-        "empty": True,
+        "offsets": list(offsets),
+        "empty": family.allow_empty,
+        "chain_family": family.as_manifest(),
         "states": len(states),
-        "files": ["values/empty.npy", *[f"values/offset_{offset:02d}.npy" for offset in offsets]],
+        "files": [
+            *(["values/empty.npy"] if family.allow_empty else []),
+            *[f"values/offset_{offset:02d}.npy" for offset in offsets],
+        ],
         "build_seconds": time.perf_counter() - started,
         "hwp_config": Path(args.hwp_config).name if args.hwp_config else None,
     }
@@ -156,6 +169,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--hwp-config")
     parser.add_argument("--years", type=int, default=50)
     parser.add_argument("--offsets", default="0-49")
+    parser.add_argument("--treatment", default="CC")
+    parser.add_argument("--events", type=int, default=1)
+    parser.add_argument("--no-empty", action="store_true")
     parser.add_argument("--workers", type=int, default=32)
     parser.add_argument("--dtype", choices=["float32", "float64"], default="float64")
     parser.add_argument("--limit", type=int)

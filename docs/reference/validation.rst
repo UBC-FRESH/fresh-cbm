@@ -13,6 +13,7 @@ Manifest identity
 - positive year count and state count
 - dtype ``float32`` or ``float64``
 - unique accounts, offsets, and files
+- a declared chain family, when present, with one event and matching offsets
 
 Client integrity checks
 -----------------------

@@ -8,6 +8,7 @@ The API reference is generated from the package docstrings and annotations.
 
    fresh-cbm
    schema
+   family
    commands
    check-workflow
    dashboard

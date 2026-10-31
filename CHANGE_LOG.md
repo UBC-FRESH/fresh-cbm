@@ -31,3 +31,9 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
 - P2 close-out: PR #11 squash-merged as `1a2b9d5`. Console entry points and
   cache integrity checks are live; dashboard, docs, and CI are green. Parent
   issue #9 and task #10 closed. Next phase is planned in `ROADMAP.md`.
+
+- P3.1 chain-family contract: added `fresh_cbm.family.ChainFamily`, wrote it into
+  new manifests, exposed it through `StateCache.chain_family`, and made the client
+  reject family/offset/empty-policy mismatches. Legacy manifests without a family
+  still load. Builder options include `--treatment`, `--events`, and `--no-empty`;
+  more than one event is rejected. Dashboard: GREEN.
