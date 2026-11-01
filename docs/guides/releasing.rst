@@ -60,9 +60,13 @@ Run it from `main`:
 The workflow builds the sdist and wheel, checks them with `twine`, and publishes
 with `pypa/gh-action-pypi-publish`.
 
-Verify the TestPyPI install:
+Verify the published installs:
 
 .. code-block:: bash
+
+   python -m venv /tmp/pypi-venv
+   /tmp/pypi-venv/bin/pip install fresh-cbm==0.2.0
+   /tmp/pypi-venv/bin/fresh-cbm-verify --help
 
    python -m venv /tmp/testpypi-venv
    /tmp/testpypi-venv/bin/pip install \

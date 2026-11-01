@@ -15,7 +15,7 @@ Every phase starts as `planned` with `Parent issue: TBD`. Activate a phase only 
 | P4 Verify | #25 | `feature/p4-verification` | complete |
 | P5 Release and deploy | #29 | `feature/p5-release` | complete |
 | P6 Operate and maintain | #33 | `feature/p6-maintenance` | complete |
-| P7 Package publication | #36 | `feature/p7-testpypi` | active |
+| P7 Package publication | #36 | `feature/p7-testpypi` | complete |
 
 ## Lifecycle Map
 
@@ -179,14 +179,14 @@ Acceptance criteria:
 
 Parent issue: #36
 Branch: `feature/p7-testpypi`
-Status: active
+Status: complete
 
 Goal: publish the package through GitHub OIDC trusted publishing.
 
-- [ ] P7.1 Add the TestPyPI release workflow
-- [ ] P7.2 Add and run the PyPI trusted-publishing job
-- [ ] P7.3 Verify both published artifacts
-- [ ] P7.4 Record the trusted-publisher decision
+- [x] P7.1 Add the TestPyPI release workflow
+- [x] P7.2 Add and run the PyPI trusted-publishing job
+- [x] P7.3 Verify both published artifacts
+- [x] P7.4 Record the trusted-publisher decision
 
 Acceptance criteria:
 
