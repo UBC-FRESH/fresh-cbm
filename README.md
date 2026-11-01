@@ -20,6 +20,12 @@ Start with the cache format, building, and validation guides.
 Phase P0 (workflow bootstrap and documentation) is complete. `ROADMAP.md` is the
 plan of record; P1 is planned.
 
+## Install
+
+```bash
+pip install fresh-cbm
+```
+
 ## Quick start
 
 ```bash

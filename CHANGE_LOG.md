@@ -92,3 +92,7 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
   GitHub OIDC, environment `testpypi`, build/twine checks, and
   `pypa/gh-action-pypi-publish`; no PyPI token is stored. Documented the
   workflow, TestPyPI install check, and a separate PyPI job/environment.
+
+- P7 close-out: `fresh-cbm==0.2.0` published to TestPyPI and PyPI via GitHub
+  OIDC trusted publishing. No token secret was added. Both clean-venv installs
+  and console entry points verified. Parent issue #36 closed.
