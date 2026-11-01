@@ -15,6 +15,7 @@ Every phase starts as `planned` with `Parent issue: TBD`. Activate a phase only 
 | P4 Verify | #25 | `feature/p4-verification` | complete |
 | P5 Release and deploy | #29 | `feature/p5-release` | complete |
 | P6 Operate and maintain | #33 | `feature/p6-maintenance` | complete |
+| P7 Package publication | #36 | `feature/p7-testpypi` | active |
 
 ## Lifecycle Map
 
@@ -173,3 +174,23 @@ Acceptance criteria:
 
 1. Create the GitHub repository and the Phase 0 parent issue. This needs maintainer approval.
 2. Activate Phase 0 by setting its parent issue number and its status to `active`, here and in the tracker map.
+
+## Phase 7: Package publication
+
+Parent issue: #36
+Branch: `feature/p7-testpypi`
+Status: active
+
+Goal: publish the package through GitHub OIDC trusted publishing.
+
+- [ ] P7.1 Add the TestPyPI release workflow
+- [ ] P7.2 Add and run the PyPI trusted-publishing job
+- [ ] P7.3 Verify both published artifacts
+- [ ] P7.4 Record the trusted-publisher decision
+
+Acceptance criteria:
+
+- the release workflow uses `id-token: write` and environments `testpypi` and `pypi`
+- no API token is stored in the repository
+- the published artifacts install
+- docs and CI stay green

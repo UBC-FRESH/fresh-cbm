@@ -39,3 +39,34 @@ maintainer decision; do not publish externally without explicit approval.
 Do not commit multi-GB arrays to ordinary git history. Release assets or LFS are
 the supported storage paths for caches. The manifest paths are repository-relative; local
 machine paths must not be published.
+
+Trusted publishing
+------------------
+
+The repository uses GitHub OIDC trusted publishing. No PyPI token is stored in
+the repository.
+
+- workflow: `.github/workflows/release.yaml`
+- environments: `testpypi` and `pypi`
+- project: `fresh-cbm`
+
+Run it from `main`:
+
+.. code-block:: bash
+
+   gh workflow run release.yaml --ref main -f target=testpypi
+   gh workflow run release.yaml --ref main -f target=pypi
+
+The workflow builds the sdist and wheel, checks them with `twine`, and publishes
+with `pypa/gh-action-pypi-publish`.
+
+Verify the TestPyPI install:
+
+.. code-block:: bash
+
+   python -m venv /tmp/testpypi-venv
+   /tmp/testpypi-venv/bin/pip install \
+     --index-url https://test.pypi.org/simple/ \
+     --extra-index-url https://pypi.org/simple/ \
+     fresh-cbm==0.2.0
+   /tmp/testpypi-venv/bin/fresh-cbm-verify --help

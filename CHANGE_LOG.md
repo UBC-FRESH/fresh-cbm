@@ -87,3 +87,8 @@ Newest entries last. Each milestone gets a dated entry that matches the roadmap 
 
 - P6 close-out: maintenance policy and first review published. All lifecycle
   phases P0–P6 are complete. Parent issue #33 closed. Next review 2026-11-30.
+
+- P7.1 TestPyPI trusted publishing: added `.github/workflows/release.yaml` with
+  GitHub OIDC, environment `testpypi`, build/twine checks, and
+  `pypa/gh-action-pypi-publish`; no PyPI token is stored. Documented the
+  workflow, TestPyPI install check, and a separate PyPI job/environment.
